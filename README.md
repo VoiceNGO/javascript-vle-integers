@@ -60,3 +60,6 @@ var buf = new Buffer(encoded, 'ascii');
 
 buf.write(encoded, 0, 'ascii');
 ```
+
+There is also an optional `encode.array` method that returns an array of numbers
+  representing the ascii value of each byte.

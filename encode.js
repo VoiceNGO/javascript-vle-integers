@@ -1,4 +1,4 @@
-module.exports = function(number) {
+function encode(number) {
   var bytes     = [];
   var firstByte = true;
   var negative  = number < 0;
@@ -35,7 +35,15 @@ module.exports = function(number) {
     bytes.push(byte);
   }
 
-  return bytes.map(function(byte) {
+  return bytes;
+}
+
+module.exports = function(number) {
+  return encode(number).map(function(byte) {
     return String.fromCharCode(byte);
   }).join('');
+};
+
+module.exports.array = function(number) {
+  return encode(number);
 };
