@@ -24,3 +24,39 @@ var decode  = require('vle-integers').decode;
 var encode  = encode(123);
 var decoded = decode(123);
 ```
+
+## Decode Method
+
+The decode method will only decode the leading number, meaning that if you
+  attempt to decode something like:
+
+```js
+var data = encode('123') + 'asdf';
+```
+
+It will work correctly.  It will also properly decode Buffers.  There is an
+  optional `decode.consume` method that consumes the processed bytes and
+  returns:
+
+```js
+{
+    number : number
+  , bytes  : bytes  // without the leading consumed bytes
+};
+```
+
+## Encode Method
+
+Encoding always returns a string.  If you want a Buffer, create one by passing
+  the result to a Buffer and being sure to set the encoding as `ascii`:
+
+```js
+var encode  = require('vle-integers').encode;
+var encoded = encode(123);
+
+var buf = new Buffer(encoded, 'ascii');
+
+// or
+
+buf.write(encoded, 0, 'ascii');
+```
