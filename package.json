@@ -1,0 +1,27 @@
+{
+  "name": "vle-integers",
+  "version": "0.0.1",
+  "description": "Variable Length Encoded Integers",
+  "main": "decode.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyklus/javascript-vle-integers.git"
+  },
+  "keywords": [
+    "numbers",
+    "integers",
+    "variable",
+    "length",
+    "encoding",
+    "vle"
+  ],
+  "author": "Mark Kahn <m@vouchr.com>",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/zyklus/javascript-vle-integers/issues"
+  },
+  "homepage": "https://github.com/zyklus/javascript-vle-integers#readme"
+}
