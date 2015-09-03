@@ -1,9 +1,9 @@
-function process(bytes) {
+function decode(bytes, offset) {
   var isString  = typeof bytes === 'string';
   var number    = 0;
-  var ix        = 0;
-  var byte      = bytes[ix];
+  var byte      = bytes[offset];
   var firstByte = true;
+  var offsetCtr = 0;
   var negative;
   var bits;
   var byteVal;
@@ -28,48 +28,37 @@ function process(bytes) {
     byteVal = byte & ((1 << (bits)) - 1);
 
     if (contFlag) {
-      byte = bytes[ix + 1];
+      byte = bytes[offset + offsetCtr + 1];
 
     } else {
       byte = null;
     }
 
+    number   += byteVal << (offsetCtr ? 6 + 7 * (offsetCtr - 1) : 0);
     firstByte = false;
-    number   += byteVal << (ix ? 6 + 7 * (ix - 1) : 0);
-    ix++;
+    offsetCtr++;
   }
 
   return {
       number : negative ? -number : number
-    , ix     : ix
+    , offset : offset + offsetCtr
   };
 };
 
 /**
- * Decodes a VLE integer at the beginning of a byte buffer or string
+ * Decodes a VLE integer at a specific offset in a string or buffer
  *
- * @param  {Buffer|String} bytes raw data
- * @return {Number}        The decoded number
- */
-module.exports = function(bytes){
-  return process(bytes).number;
-};
-
-/**
- * Decodes a VLE integer at the beginning of a byte buffer or string and returns the decoded number along with the
- *   original string/buffer with the number consumed
+ * If `offset` is not passed, returns the decoded number.  If offset is passed, returns
+ *   `{number: decodedNumber, offset: newOffset}`
  *
- * @param  {Buffer|String} bytes raw data
- * @return {Object}
- * @return {Buffer|String} return.bytes
- * @return {Number}        return.number
+ * @param  {String|ByteBuffer} bytes    raw data
+ * @param  {Number}            [offset] Offset to start reading bytes at
+ * @return {Number|Object} return Parsed Number
+ * @return {Number} return.number Parsed number
+ * @return {Number} return.offset New offset
  */
-module.exports.consume = function(bytes) {
-  var processed = process(bytes);
-  var bytes     = bytes.slice(processed.ix);
+module.exports = function(bytes, offset) {
+  var decoded = decode(bytes, offset || 0);
 
-  return {
-      number : processed.number
-    , bytes  : bytes
-  };
+  return (offset == null) ? decoded.number : decoded;
 };

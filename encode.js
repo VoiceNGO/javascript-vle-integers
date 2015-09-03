@@ -1,4 +1,7 @@
 function encode(number) {
+  if (number >= Math.pow(2, 31)) {
+    throw new Error('vle-integers can not currently encode a number larger than 2^31 - 1');
+  }
   var bytes     = [];
   var firstByte = true;
   var negative  = number < 0;
