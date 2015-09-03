@@ -29,22 +29,19 @@ var decoded = decode(123);
 
 ## Decode Method
 
-The decode method will only decode the leading number, meaning that if you
+The decode method will only decode a specific number, meaning that if you
   attempt to decode something like:
 
 ```js
-var data = encode('123') + 'asdf';
+var decoded = encode('123') + 'asdf'; // yields 123
 ```
 
 It will work correctly.  It will also properly decode Buffers.  There is an
-  optional `decode.consume` method that consumes the processed bytes and
-  returns:
+  optional `offset` that you can use to tell it where to start decodeing from:
 
 ```js
-{
-    number : number
-  , bytes  : bytes  // without the leading consumed bytes
-};
+var encoded = 'asdf' + encode(123);
+var decoded = decode(encoded, 4); // yields {number: 123, offset:6}
 ```
 
 ## Encode Method
