@@ -1,6 +1,6 @@
 {
   "name": "vle-integers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Variable Length Encoded Integers",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zyklus/javascript-vle-integers.git"
+    "url": "git+https://github.com/d9d/javascript-vle-integers.git"
   },
   "keywords": [
     "numbers",
@@ -21,7 +21,7 @@
   "author": "Mark Kahn <m@vouchr.com>",
   "license": "Unlicense",
   "bugs": {
-    "url": "https://github.com/zyklus/javascript-vle-integers/issues"
+    "url": "https://github.com/d9d/javascript-vle-integers/issues"
   },
-  "homepage": "https://github.com/zyklus/javascript-vle-integers#readme"
+  "homepage": "https://github.com/d9d/javascript-vle-integers#readme"
 }
