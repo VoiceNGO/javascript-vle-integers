@@ -13,11 +13,6 @@ function encode(number) {
 
   while (number > 0) {
     if (firstByte) {
-      if (number < 0) {
-        var negative = true;
-        number = -number;
-      }
-
       byte = number & 63;
 
       if (negative) {
@@ -26,12 +21,13 @@ function encode(number) {
 
       number >>= 6;
       firstByte = false;
+
     } else {
       byte = number & 127;
       number >>= 7;
     }
 
-    if(number) {
+    if (number) {
       byte |= 128;
     }
 
